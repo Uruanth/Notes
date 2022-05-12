@@ -128,6 +128,22 @@ Pipes only transform the visual shape of variables, they don't change the value 
 * titlecase
 * number
 * json
+* date
+
+~~~html
+<!-- Formato fecha normal -->
+{{ value | date }}
+<!-- Formato fecha formato 'short' -->
+{{ value | date:'short' }}
+<!-- Formato fecha formato 'long' -->
+{{ value | date:'long' }}
+<!-- Formato fecha solo el mes con dos digitos -->
+{{ value | date:'MM' }}
+<!-- Formato fecha formato personalizado -->
+{{ value | date: 'MM dd, yyyy' }}
+~~~
+
+
 
 ## Modules
 
