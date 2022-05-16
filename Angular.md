@@ -121,7 +121,7 @@ Pipes only transform the visual shape of variables, they don't change the value 
 </h1>
 ~~~
 
-#### GENERIC PIPES
+### GENERIC PIPES
 
 * upperCase
 * lowerCase
@@ -142,6 +142,89 @@ Pipes only transform the visual shape of variables, they don't change the value 
 <!-- Formato fecha formato personalizado -->
 {{ value | date: 'MM dd, yyyy' }}
 ~~~
+
+#### Cambiar idioma por defecto de  los pipes
+
+#### Change the default language of pipes
+
+En el app module:	|| In the app module:
+
+~~~typescript
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CompWithoutTestComponent } from './comp-without-test/comp-without-test.component';
+import { WithoutStyleComponent } from './without-style/without-style.component';
+
+//change language
+//XX es el pais del lenguaje || is country of language 
+import { LOCALE_ID, NgModule } from '@angular/core';
+import localeEs from '@angular/common/locales/es-XX';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData( localeEs );
+registerLocaleData( localeFr );
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CompWithoutTestComponent,
+    WithoutStyleComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+   //Cambiar de manera global || overall shape global
+  providers: [{
+      provide: LOCALE_ID,
+      useValue: 'es-XX'
+  }],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+~~~
+
+En el pipe || In the pipe 
+
+~~~html
+<!-- Formato fecha idioma ingles -->
+{{ value | date: 'MM dd, yyyy':'':'en' }}
+<!-- Formato fecha idioma frances, esto funciona porque se importo y se registro en el app moduel -->
+{{ value | date: 'MM dd, yyyy':'':'fr' }}
+~~~
+
+* Decimal
+
+  ~~~html
+  <!-- Formato decimal -->
+  <!-- 1 entero y los decimales en un rango de 2 a 2 (cantidad de decimales no valor de este) -->
+  {{ value | number:'1.2-2'  }}
+  ~~~
+
+* Currency
+
+  ~~~html
+  <!-- Formato moneda -->
+  <!-- tipo moneda - tipo simbolo - cantidad de enteros y decimales -->
+  {{ value | currency:'COP':'symbol-narrow':'1.0-4'  }}
+  ~~~
+
+* Percent
+
+  ~~~html
+  <!-- Formato moneda -->
+  <!--  cantidad de enteros y decimales -->
+  {{ value | percent:'2.2-2' }}
+  ~~~
+
+  
+
+
 
 
 
