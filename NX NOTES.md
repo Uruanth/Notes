@@ -88,7 +88,7 @@ luego esta libreria se crea con un xxx.module.ts, este archivo se puede eliminar
 
 Para el ejemplo se creara un folder con un archivo ts y un archivo ts suelto y se usara dentro de la app de angular creada.
 
-![image-20220519201314686](.\imagenes\image-20220519201314686.png)
+![image-20220519201314686](./imagenes/image-20220519201314686.png)
 
 Luego de tener los archivos creados se debe actualizar el index.ts, quedaria
 
