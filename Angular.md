@@ -222,6 +222,57 @@ En el pipe || In the pipe
   {{ value | percent:'2.2-2' }}
   ~~~
 
+* i18nSelect:
+
+  Dependiendo del genero que tenga la variable, sera la opción mostrada, el argumento de mapeado es obligatorio.
+
+  ~~~html
+  <!-- Formato i18nSelect -->
+  {{ genero | i18nSelect:mapeado }}
+  ~~~
+
+  **component**
+
+  ~~~typescript
+  nombre: string = 'asdadasd';
+  genero: string = 'femenino';
+  
+  mapeado = {
+      'femenino': 'opcion 1',
+      'masculino': 'opcion 2'
+  }
+  ~~~
+
+* i18nPlural
+
+  Dependiendo de la respuesta de clientes.length va usar una de las opciones del mapeado, el other es cualquier otra opcion posible, y si dentro de la cadena se usa el #, muestra el valor que recibe el pipe, en este caso el valor que tenga clientes.length
+
+  ~~~html
+  <!-- Formato i18nPlural -->
+  {{ clientes.length | i18nPlural:mapeado }}
+  ~~~
+
+  **component**
+
+  ~~~typescript
+  clientes: string[] = ['Maria', 'Juan', 'Pedro'];
+  
+  mapeado = {
+      '=0': 'opcion 1',
+      '=1': 'opcion 2',
+      'other': 'opcion 4 #'
+  }
+  
+  ~~~
+
+* slice
+
+  ~~~html
+  <!-- Formato i18nPlural -->
+  <!-- toma los valores desde 0 a 2 del arreglo, si solo se deja el primer atributo es desde donde empieza y toma el resto del arreglo, el segundo argumento es el indice hasta cual debe llegar pero no lo incluye -->
+  {{ clientes | slice:0:2 }}
+  ~~~
+
   
 
 
