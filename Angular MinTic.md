@@ -5,7 +5,7 @@
 Declarar variables, se puede especificar un solo tipo de dato o varios que puede aceptar la variable.
 
 ~~~typescript
-let var: string | number | boolean;
+let variable: string | number | boolean;
 ~~~
 
 Dar valor por defecto a una función, siempre van primero los argumentos obligatorios (sin valor default), luego los que tienen un valor default. Si pongo un signo "?" antes de los dos puntos, le indico que es una variable opcional al momento de invocar la función.
