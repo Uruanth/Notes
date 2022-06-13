@@ -25,7 +25,7 @@ ng g c <rute>/<nameComponent>
 ### Without tests
 
 ~~~shell
---skipTests
+--skipTests  || --skip-tests
 ~~~
 
 ### In the same folder
@@ -42,8 +42,8 @@ ng g c <rute>/<nameComponent>
 
 ### Without style file
 
-~~~she
--is
+~~~shell
+--inline-style || -is || -s
 ~~~
 
 
@@ -69,7 +69,7 @@ const routes: Routes = [
 	},
   	{
         path: '**',
-        redirect: exampleComponent
+        redirect: 'path-url'
 	}
 ];
 
@@ -268,9 +268,14 @@ En el pipe || In the pipe
 * slice
 
   ~~~html
-  <!-- Formato i18nPlural -->
   <!-- toma los valores desde 0 a 2 del arreglo, si solo se deja el primer atributo es desde donde empieza y toma el resto del arreglo, el segundo argumento es el indice hasta cual debe llegar pero no lo incluye -->
   {{ clientes | slice:0:2 }}
+  ~~~
+
+* KeyValue
+
+  ~~~html
+   
   ~~~
 
   
