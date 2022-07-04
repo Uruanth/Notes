@@ -46,7 +46,11 @@ ng g c <rute>/<nameComponent>
 --inline-style || -is || -s
 ~~~
 
+### With route file
 
+~~~sh
+ng g m <nameModule> --routing
+~~~
 
 
 
@@ -319,5 +323,38 @@ import { NxWelcomeComponent } from './nx-welcome.component';
   ]
 })
 export class ModuleForExportingOnly {}
+~~~
+
+## Formulario reactivo
+
+* Importar  `ReactiveFormsModule` 
+* Crear el FormGoup en nuestro TS
+
+~~~typescript
+  public miFormulario: FormGroup = new FormGroup({
+    'nombre': new FormControl('Valor inicial')
+  });
+~~~
+
+​	El atributo nombre se debe linkear en el formulario del archivo HTML usando la directiva formControlName
+
+~~~html
+ <input
+	type="text"
+	formControlName = "nombre"
+	class="form-control"
+/>
+~~~
+
+
+
+Otra manera de crear el FormGroup
+
+~~~typescript
+ public miFormulario: FormGroup = this.fb.group({
+    'nombre': ['Valor inicial', [Validators.required]],
+    'precio': [0],
+    'exitencias': [0],
+  });
 ~~~
 
