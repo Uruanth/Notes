@@ -654,3 +654,81 @@ nmap <leader>q :q<CR>
 
 
 
+---
+
+# Agregar LUA a NVIM
+
+1. De este repo seguir instrucciones mas o menos [repo](https://github.com/nvim-telescope/telescope.nvim)
+
+2. Agregar estos dos plugin a `init.vim`
+
+   ~~~shell
+   Plug 'nvim-lua/plenary.nvim'
+   Plug 'nvim-telescope/telescope.nvim'
+   ~~~
+
+3. `C:\Users\adivi\AppData\Local\nvim\` en este directorio crear una carpeta llamada `lua`.
+
+4. `C:\Users\adivi\AppData\Local\nvim\lua` en este directorio crear una carpeta llamada `daironper`, este sera el nombre del espacio de trabajo que uno quiera
+
+5. `C:\Users\adivi\AppData\Local\nvim\lua\daironper` en este directorio crear dos archivos:
+
+   1. `init.lua`, el cual contendra la linea 
+
+      ~~~shell
+      required('daironper.telescope')
+      ~~~
+
+   2. `telescope.lua`, el cual contendra la linea 
+
+      ~~~shell
+      require('telescope').setup {}
+      ~~~
+
+6. `C:\Users\adivi\AppData\Local\nvim\init.vim` agregar la linea
+
+   ~~~shell
+   lua require('daironpe')
+   ~~~
+
+   
+
+---
+
+# LSP
+
+Soporte de lenguajes para autocompletado y todo eso.
+
+1. Buscar en el [repo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver) el lenguaje que se quiere
+
+2. usando npm instalar el serve del lenguaje
+
+3. `C:\Users\adivi\AppData\Local\nvim\lua\daironper` crear un archivo llamado `lspconfing.lua`
+
+4. Agregar al archivo creado el `require` que pide el repo
+
+   ejem:
+
+   ~~~lua
+   require('lspconfig').tsserver.setup{}
+   ~~~
+
+5. Agregar el `require` al `init.lua`
+
+   ~~~lua
+   require('daironper.lspconfig')
+   ~~~
+
+
+
+# Agregar packer
+
+1. usando un powershell como admin este comando 
+
+   ~~~shell
+   git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
+   ~~~
+
+   
+
+Igual siempre revisar la doc [oficial](https://github.com/wbthomason/packer.nvim#requirements)
