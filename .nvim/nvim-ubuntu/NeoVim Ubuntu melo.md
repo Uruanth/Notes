@@ -44,5 +44,5 @@ packer.startup(function()
 
 luego abrir init.vim y ejecutar :PlugInstall y :PackerInstall
 
-
+> Repo lista [servers](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) lsp
 
