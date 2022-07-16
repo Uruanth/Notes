@@ -740,7 +740,9 @@ observable$.pipe(
 
 ## forkJoin
 
-Recibe observables como argumento, se subscribe a todos estos y cuando todos se completan emite un solo arreglo con todos los últimos elementos emitidos por los observables
+Recibe observables como argumento, se subscribe a todos estos y cuando todos se completan emite un solo arreglo con todos los últimos elementos emitidos por los observables.
+
+Por lo anterior este necesita que todos los observables se completen a diferencia del combinaLatest
 
 ~~~typescript
 forkJoin(observable1$, 
