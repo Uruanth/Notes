@@ -358,3 +358,33 @@ Otra manera de crear el FormGroup
   });
 ~~~
 
+
+
+## Peticiones x-ndjson
+
+~~~typescript
+public async streamm() {
+    const response = await fetch('http://localhost:8080', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/x-ndjson',
+        'Accept': 'application/x-ndjson',
+      }
+    });
+
+    const reader = response.body?.pipeThrough(new TextDecoderStream())
+      .getReader();
+
+    while (true) {
+      const prom = await reader?.read();
+      if (prom?.done) break;
+      console.log('received', JSON.parse(prom?.value || ''));
+    }
+
+    console.log('response fully received');
+
+  }
+~~~
+
+
+
