@@ -2,7 +2,26 @@
 
 # Grid
 
+~~~css
+.container {
+  display: grid;
+  /* Numero y tamaño columbas grilla */
+  /* grid-template-columns:33% 33% 33%; */
 
+  /* Repetir el valor deseado */
+  grid-template-columns: repeat(4, 1fr);
+  /* Tamaño filas */
+  grid-template-rows: auto;
+  /* Espaciado entre filas y columnas 
+    puede usarse solo para filas o columnas con
+    column-gap: ;
+    row-gap: ;
+    */
+  gap: 1em;
+  /* Definir el minimo y maximo tamaño de las filas */
+  grid-auto-rows: minmax(20px, auto);
+}
+~~~
 
 # Animaciones
 
