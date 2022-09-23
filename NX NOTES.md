@@ -32,6 +32,20 @@ npm add -D @nrwl/angular
 nx g @nrwl/angular:app
 ~~~
 
+## Add module to app
+
+~~~shell
+npx nx generate @schematics/angular:module shared --project=gestion-plan-trabajo-front --no-interactive
+~~~
+
+## Add component to app
+
+~~~sh
+npx nx generate @schematics/angular:component shared/header --project=gestion-plan-trabajo-front --module=shared --no-interactive
+~~~
+
+
+
 ## Add lib
 
 ~~~shell
