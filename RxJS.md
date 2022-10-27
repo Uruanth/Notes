@@ -669,11 +669,11 @@ observable$.pipe(
 
 ## exhaustMap
 
-Retorna la subscripcion a un nuevo observable, el cocatMap genera una nueva subscripcion por cada elemento que le llega. Si se emite otro elemento mientras aun no se completa la emision del anterior, ignora la nueva supscripcion, solo genera una nueva subscripcion si la anterior ya se completo
+Ignora todas las subscripciones nuevas mientras halla alguna subscripcion activa, para poder subscribirse nuevamente, necesita que la subscripcion actual se comp
 
 ~~~typescript
 observable$.pipe(
-	cocathMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
+	exhaustMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
 ).subscribe( console.log )
 ~~~
 
