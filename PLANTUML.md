@@ -78,6 +78,10 @@ package foo6 <<Database>> {
 class Class6
 }
 
+class System << (S,#FF7700) Singleton >>
+class Date << (D,orchid) >>
+
+
 object firstObject 
 object "[AR] My Second Object"  as o2 {
                                       name = "Dummy"
@@ -88,3 +92,4 @@ object "[AR] My Second Object"  as o2 {
 @enduml
 ~~~
 
+![image-20221028192313375](.\imagenes\plantUML)
