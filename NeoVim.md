@@ -40,7 +40,7 @@ Nos desplazamos de manera normal, pero va a ir seleccionando desde donde empezo 
 | J         | mover abajo                                                  |
 | K         | mover arriba                                                 |
 | L         | mover derecha                                                |
-| W w       | mover al comienzo de la siguiente palabra                    |
+| W w       | mover al final de la siguiente palabra                       |
 | B b       | mover al comienzo de la anterior palabra                     |
 | i         | Modo insert desde el caracter antes del cursor               |
 | a         | Modo insert desde el caracter despues del cursor             |
