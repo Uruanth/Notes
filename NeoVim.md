@@ -77,6 +77,25 @@ Nos desplazamos de manera normal, pero va a ir seleccionando desde donde empezo 
 | \<arg>k   | arg es el numero de lineas que quiero devolverme             |
 |           |                                                              |
 
+### Navegación
+
+| **Tecla(s)** | **Lo que hace**                                              |
+| ------------ | ------------------------------------------------------------ |
+| ctrl + e     | Scroll una linea abajo                                       |
+| ctrl + y     | Scroll una linea arriba                                      |
+| ctrl + f     | Scroll una pagina abajo                                      |
+| ctrl + b     | Scroll una pagina arriba                                     |
+| ctrl + d     | Scroll una media pagina abajo                                |
+| ctrl + u     | Scroll una media pagina arriba                               |
+| H            | Mueve el cursor al principio de la pantalla                  |
+| L            | Mueve el cursor a la mitad                                   |
+| M            | Mueve el cursor al final de la pantalla                      |
+| \<arg> k     | arg es el numero de lineas que quiero devolverme             |
+| \<arg> k     | arg es el numero de lineas que quiero avanzar                |
+| : \<arg>     | arg es el numero de linea que quiero ir                      |
+| m\<arg>      | arg es un caracter alfabetico, marca la ubicación actual del cursos |
+| '\<arg>      | arg es un caracter alfabetico que se uso para marcar un lugar, el comando regresa el cursor a la marca |
+
 
 
 ~~~shell
