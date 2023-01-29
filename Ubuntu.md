@@ -21,6 +21,12 @@
    cp -r <temaNuevo> /usr/share/icons #Para iconos
    ~~~
 
+   ## Export variable
+   
+   ```bash
+   export PATH=/<ruta>:$PATH
+   ```
+   
    
 
 ## TMUX
