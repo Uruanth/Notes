@@ -47,3 +47,10 @@ EXPOSE 3000
 CMD ["node", "/home/app/index.js"]
 ~~~
 
+## Images
+
+~~~bash
+## MySQL
+docker run -d -p 3306:3306 --name mysql-db -e MYSQL_ROOT_PASSWORD=admin mysql
+~~~
+

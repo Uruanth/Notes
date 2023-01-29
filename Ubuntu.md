@@ -45,3 +45,27 @@ q
 
 ~~~
 
+## .rar
+
+Primero instalar rar y unrar.
+
+~~~bash
+sudo apt-get install rar
+sudo apt-get install unrar
+~~~
+
+### Comprimir archivo
+
+Tener la cosola en la carpeta donde esta el archivo
+
+~~~ bash
+rar a nombre_a_dar.rar archivo1 archivo2 carpeta1 
+~~~
+
+### Descomprimir archivos
+
+Tener la cosola en la carpeta donde esta el archivo, luego de la x el nombre del archivo, luego la ruta donde se descomprime.
+
+~~~ bash
+unrar x mk.rar /home/dairon/Videos
+~~~

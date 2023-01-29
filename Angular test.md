@@ -429,6 +429,14 @@ describe('RouterMedicoComponent', () => {
 });
 ~~~
 
+
+
+### Marbles diagram
+
+https://rxjs.dev/guide/testing/marble-testing
+
+
+
 ---
 
 # Web bundle Analyzer
