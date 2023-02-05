@@ -250,3 +250,10 @@ ALTER TABLE `productos`
 -- -------------------------------------------------------------
 ~~~
 
+## PostgreSQL
+
+~~~sql
+-- ver todas las tablas 
+SELECT * FROM pg_catalog.pg_tables;
+~~~
+
