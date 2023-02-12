@@ -7,54 +7,121 @@
 * Se tiene una matriz de n x n que contiene números del 1 al 9, simulado usando una matriz unidimensional. Así, por ejemplo, esta matriz: 1 2 9 2 5 3 5 1 5 Se representaría como (1,2,9,2,5,3,5,1,5). El objetivo es identificar el camino que de la menor suma al recorrer el arreglo bi-dimencional de izquierda a derecha. Se empieza en la columna izquierda y se mueve siempre una columna a la derecha de la misma fila o a una fila hacia arriba o hacia abajo. En el ejemplo, si parte de 1, puede pasar al 2 o al 5. De ahí, si pasó al 5 puede pasar al 9 al 3 o al 5. Por otro lado, si pasa del 1 al 2, desde el 2 de la columna del medio no podría pasar al 5 de la ultima fila en la columna derecha. El valor de n puede ser entre 1 y 4.
 
 ~~~java
-package org.example.cardgame.application.command.adapter.bus;
-
+package com.grafo;
 
 import java.util.*;
+import java.util.logging.Logger;
 
-public class MM {
-
+public class Prueba {
+    static Logger log = Logger.getLogger("test");
     static int[] myArray = {
             1, 2, 9,
             2, 5, 3,
             5, 1, 5
     };
+
     static int n = 3;
     static List<List<Integer>> matriz = new ArrayList<>();
-    static List<Integer> camino = new ArrayList<>();
+    static List<Integer> caminoFinal = new ArrayList<>();
+    static List<Integer> caminoActual = new ArrayList();
+    static int indiceMaximo = n - 1;
 
     public static void main(String[] args) {
         init();
-//        for (int i = 0; i < matriz.size(); i++) {
-//            List<Integer> listIn = new ArrayList<>();
-//            listIn.add(matriz.get(i).get(0));
-//            var actual = recursividad(i, 1, listIn);
-//            calculoMenor(actual);
-//        }
+        List<Node> nodes = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            nodes.add(recursividad(i, 0, new Node(matriz.get(i).get(0))));
+        }
 
-        matriz.forEach(integers -> {
-            List<Integer> listIn = new ArrayList<>();
-            listIn.add(integers.get(0));
-            var actual = recursividad(matriz.indexOf(integers), 1, listIn);
-            calculoMenor(actual);
+        nodes.forEach(nodeInit->{
+            caminoActual.clear();
+            caminoActual.add(nodeInit.data);
+            recursividadFor(0, nodeInit);
         });
-        System.out.println("camino = " + camino);
+
+        log.info("caminoFinal = " + caminoFinal);
+
+
     }
 
-    private static void calculoMenor(List<Integer> actual) {
-        if (camino.isEmpty()) {
-            camino.addAll(actual);
+    public static void recursividadFor(int index, Node node) {
+        if (caminoActual.size() > n) {
+            throw new RuntimeException("se crecio esta monda");
+        }
+
+        if (index == (indiceMaximo - 1)) {
+            node.children.forEach(nodeFinal -> {
+                if (caminoActual.size() == n) {
+                    caminoActual.set(indiceMaximo, nodeFinal.data);
+                } else {
+                    caminoActual.add(nodeFinal.data);
+                }
+                int sumaActual = caminoActual.stream().reduce(0, (a, b) -> a + b);
+                int sumCamFi = caminoFinal.stream().reduce(0, (a, b) -> a + b);
+                if (sumaActual < sumCamFi) {
+                    caminoFinal.clear();
+                    caminoFinal.addAll(caminoActual);
+                }
+            });
         } else {
-            int sumAnterior = camino.stream().reduce(0, (a, b) -> a = b);
-            int sumActual = actual.stream().reduce(0, (a, b) -> a = b);
-            if (sumAnterior < sumActual) {
-                camino.clear();
-                camino.addAll(actual);
-            }
+            node.children.forEach(nodeHijo -> {
+                if (caminoActual.size() == n) {
+                    caminoActual.set(index+1, nodeHijo.data);
+                } else  {
+                    caminoActual.add(nodeHijo.data);
+                }
+                recursividadFor(index + 1, nodeHijo);
+            });
         }
     }
 
+
+    private static Node recursividad(int row, int column, Node node) {
+
+        int nextCol = column + 1;
+        if (nextCol > indiceMaximo || row > indiceMaximo) {
+            return node;
+        }
+        if (row == 0) {
+            node.children.add(new Node(
+                    matriz.get(row).get(nextCol)
+            ));
+            node.children.add(new Node(
+                    matriz.get(row + 1).get(nextCol)
+            ));
+            recursividad(row, nextCol, node.children.get(0));
+            recursividad(row + 1, nextCol, node.children.get(1));
+        } else if (row == indiceMaximo) {
+            node.children.add(new Node(
+                    matriz.get(row - 1).get(nextCol)
+            ));
+            node.children.add(new Node(
+                    matriz.get(row).get(nextCol)
+            ));
+
+            recursividad(row - 1, nextCol, node.children.get(0));
+            recursividad(row, nextCol, node.children.get(1));
+        } else {
+            node.children.add(new Node(
+                    matriz.get(row - 1).get(nextCol)
+            ));
+            node.children.add(new Node(
+                    matriz.get(row).get(nextCol)
+            ));
+            node.children.add(new Node(
+                    matriz.get(row + 1).get(nextCol)
+            ));
+            recursividad(row - 1, nextCol, node.children.get(0));
+            recursividad(row, nextCol, node.children.get(1));
+            recursividad(row + 1, nextCol, node.children.get(2));
+        }
+        return node;
+    }
+
+    
+    
     private static void init() {
+        caminoFinal.addAll(List.of(0, 0, Integer.MAX_VALUE));
         List<Integer> numeros = new ArrayList<>();
         Arrays.stream(myArray).forEach(numeros::add);
         if (n / myArray.length == 0) {
@@ -64,47 +131,7 @@ public class MM {
             }
         }
     }
-
-    private static int menorDelaLista(List<Integer> values) {
-        return values.stream().reduce(values.get(0), (a, b) -> a < b ? a : b);
-    }
-
-    private static List<Integer> recursividad(int i, int j, List<Integer> ruta) {
-        int menorColumna = 0;
-        if (j == n) {
-            return ruta;
-        }
-        if (i == 0) {
-            List<Integer> next = List.of(
-                    matriz.get(0).get(j),
-                    matriz.get(1).get(j)
-            );
-            menorColumna = menorDelaLista(next);
-            ruta.add(menorColumna);
-            return recursividad(next.indexOf(menorColumna), j + 1, ruta);
-
-        } else if (i == n - 1) {
-            List<Integer> next = List.of(
-                    matriz.get(n - 2).get(j),
-                    matriz.get(n - 1).get(j)
-            );
-            menorColumna = menorDelaLista(next);
-            ruta.add(menorColumna);
-            return recursividad(next.indexOf(menorColumna), j + 1, ruta);
-
-        } else {
-            List<Integer> next = List.of(
-                    matriz.get(i - 1).get(j),
-                    matriz.get(i).get(j),
-                    matriz.get(i + 1).get(j)
-            );
-            menorColumna = menorDelaLista(next);
-            ruta.add(menorColumna);
-            return recursividad(next.indexOf(menorColumna), j + 1, ruta);
-        }
-
-    }
-
+    
 }
 ~~~
 
