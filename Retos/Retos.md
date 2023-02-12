@@ -12,7 +12,8 @@ package com.grafo;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class Prueba {
+public class Mejorando {
+
     static Logger log = Logger.getLogger("test");
     static int[] myArray = {
             1, 2, 9,
@@ -26,112 +27,107 @@ public class Prueba {
     static List<Integer> caminoActual = new ArrayList();
     static int indiceMaximo = n - 1;
 
+    static Map<String, Node> listaNodes = new HashMap<>();
+
     public static void main(String[] args) {
         init();
-        List<Node> nodes = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            nodes.add(recursividad(i, 0, new Node(matriz.get(i).get(0))));
-        }
-
-        nodes.forEach(nodeInit->{
+        generateMapNodes();
+        asociarNodes();
+        for (int row = 0; row < n; row++) {
             caminoActual.clear();
-            caminoActual.add(nodeInit.data);
-            recursividadFor(0, nodeInit);
-        });
-
-        log.info("caminoFinal = " + caminoFinal);
-
-
+            caminoActual.add(listaNodes.get(getKey(row, 0)).data);
+            findBestWay(0, listaNodes.get(getKey(row, 0)));
+        }
+        log.info(caminoFinal.toString());
     }
 
-    public static void recursividadFor(int index, Node node) {
-        if (caminoActual.size() > n) {
-            throw new RuntimeException("se crecio esta monda");
-        }
+    private static void findBestWay(int index, Node node) {
+        if (node.refChildren.isEmpty()) {
+            if (caminoActual.size() == n) {
+                caminoActual.set(indiceMaximo, node.data);
+            } else {
+                caminoActual.add(node.data);
+            }
+            int sumaActual = caminoActual.stream().reduce(0, (a, b) -> a + b);
+            int sumCamFi = caminoFinal.stream().reduce(0, (a, b) -> a + b);
+            if (sumaActual < sumCamFi) {
+                caminoFinal.clear();
+                caminoFinal.addAll(caminoActual);
+            }
 
-        if (index == (indiceMaximo - 1)) {
-            node.children.forEach(nodeFinal -> {
+        } else {
+            node.refChildren.forEach(keyChild -> {
                 if (caminoActual.size() == n) {
-                    caminoActual.set(indiceMaximo, nodeFinal.data);
+                    caminoActual.set(index + 1, listaNodes.get(keyChild).data);
                 } else {
-                    caminoActual.add(nodeFinal.data);
+                    caminoActual.add(listaNodes.get(keyChild).data);
                 }
-                int sumaActual = caminoActual.stream().reduce(0, (a, b) -> a + b);
-                int sumCamFi = caminoFinal.stream().reduce(0, (a, b) -> a + b);
-                if (sumaActual < sumCamFi) {
-                    caminoFinal.clear();
-                    caminoFinal.addAll(caminoActual);
-                }
-            });
-        } else {
-            node.children.forEach(nodeHijo -> {
-                if (caminoActual.size() == n) {
-                    caminoActual.set(index+1, nodeHijo.data);
-                } else  {
-                    caminoActual.add(nodeHijo.data);
-                }
-                recursividadFor(index + 1, nodeHijo);
+                findBestWay(index + 1, listaNodes.get(keyChild));
             });
         }
     }
 
-
-    private static Node recursividad(int row, int column, Node node) {
-
-        int nextCol = column + 1;
-        if (nextCol > indiceMaximo || row > indiceMaximo) {
-            return node;
-        }
-        if (row == 0) {
-            node.children.add(new Node(
-                    matriz.get(row).get(nextCol)
-            ));
-            node.children.add(new Node(
-                    matriz.get(row + 1).get(nextCol)
-            ));
-            recursividad(row, nextCol, node.children.get(0));
-            recursividad(row + 1, nextCol, node.children.get(1));
-        } else if (row == indiceMaximo) {
-            node.children.add(new Node(
-                    matriz.get(row - 1).get(nextCol)
-            ));
-            node.children.add(new Node(
-                    matriz.get(row).get(nextCol)
-            ));
-
-            recursividad(row - 1, nextCol, node.children.get(0));
-            recursividad(row, nextCol, node.children.get(1));
-        } else {
-            node.children.add(new Node(
-                    matriz.get(row - 1).get(nextCol)
-            ));
-            node.children.add(new Node(
-                    matriz.get(row).get(nextCol)
-            ));
-            node.children.add(new Node(
-                    matriz.get(row + 1).get(nextCol)
-            ));
-            recursividad(row - 1, nextCol, node.children.get(0));
-            recursividad(row, nextCol, node.children.get(1));
-            recursividad(row + 1, nextCol, node.children.get(2));
-        }
-        return node;
-    }
-
-    
-    
     private static void init() {
         caminoFinal.addAll(List.of(0, 0, Integer.MAX_VALUE));
-        List<Integer> numeros = new ArrayList<>();
-        Arrays.stream(myArray).forEach(numeros::add);
         if (n / myArray.length == 0) {
-            for (int i = 0; i < n; i++) {
-                matriz.add(new ArrayList<>());
-                matriz.get(i).addAll(numeros.subList(i * n, (i * n) + (n)));
+            List<Integer> numeros = new ArrayList<>();
+            Arrays.stream(myArray).forEach(numeros::add);
+            createMatriz(numeros);
+        }
+    }
+
+    private static void createMatriz(List<Integer> numeros) {
+        for (int i = 0; i < n; i++) {
+            matriz.add(new ArrayList<>());
+            matriz.get(i).addAll(numeros.subList(i * n, (i * n) + (n)));
+        }
+
+    }
+
+    private static void asociarNodes() {
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                String keyParent = getKey(row, col);
+                String keyChildRowB = getKey(row - 1, col + 1);
+                String keyChildRowC = getKey(row, col + 1);
+                String keyChildRowA = getKey(row + 1, col + 1);
+                if (listaNodes.containsKey(keyParent)) {
+                    addRefChild(listaNodes.get(keyParent), List.of(
+                            keyChildRowB, keyChildRowC, keyChildRowA
+                    ));
+                }
+
             }
         }
     }
-    
+
+
+    private static void addRefChild(Node node, List<String> possibleChild) {
+        possibleChild.forEach(key -> {
+            if (listaNodes.containsKey(key)) {
+                node.refChildren.add(key);
+            }
+        });
+    }
+
+    private static String getKey(int row, int col) {
+        return new StringBuilder().append(row).append(",").append(col).toString();
+    }
+
+    private static void generateMapNodes() {
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                addNode(row, col);
+            }
+        }
+    }
+
+    private static void addNode(int row, int col) {
+        listaNodes.put(
+                getKey(row, col),
+                new Node(matriz.get(row).get(col))
+        );
+    }
 }
 ~~~
 
@@ -147,8 +143,8 @@ public class Node {
 
     int data;
     boolean visited;
-    List<Node> children;
-
+	List<String> refChildren;
+    
     Node(int data){
         this.data = data;
         this.children = new ArrayList<>();
@@ -156,11 +152,11 @@ public class Node {
 
     @Override
     public String toString() {
-        return "\nNode{" +
-                "data=" + data +
-                ", visited=" + visited +
-                ", \nchildren=" + children +
-                '}';
+        return "{\"Node\": {" +
+                "\"data\":" + data +
+                ", \"visited\":" + visited +
+                ", \"refChildren\":" + refChildren +
+                "}}";
     }
 }
 ~~~
