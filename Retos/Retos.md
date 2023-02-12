@@ -135,6 +135,40 @@ public class Prueba {
 }
 ~~~
 
+#### Clases adicionales utilizadas
+
+~~~java
+package com.grafo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Node {
+
+    int data;
+    boolean visited;
+    List<Node> children;
+
+    Node(int data){
+        this.data = data;
+        this.children = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "\nNode{" +
+                "data=" + data +
+                ", visited=" + visited +
+                ", \nchildren=" + children +
+                '}';
+    }
+}
+~~~
+
+
+
+
+
 ---
 
 ### Maximo número de repeticiones del mismo caracter seguidas en un array
