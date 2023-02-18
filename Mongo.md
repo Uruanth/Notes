@@ -73,7 +73,47 @@ db.collectionName.find({
 		...
 	]
 })
+
+## Esta dentro de
+db.collectionName.find({
+    atributo: {$in: [1,2..., valorFinal]},
+})
+
+## Si el atributo existe
+db.collectionName.find({
+    atributo: { $exists: true }
+})
+
+## Se pueden usar expresiones regulares para buscar
+## Ejemplo los correos terminados en .com
+db.collectionName.find({
+    email: /.com
+})
 ~~~
+
+## Sort
+
+~~~bash
+## Limitar los resultados
+db.collectionName.find({
+    atributo: { $exists: true }
+})
+.limit(1);
+
+## Ordenar de manera asc es 1 y desc es -1
+db.collectionName.find({
+    atributo: { $exists: true }
+})
+.sort(1);
+
+## Ordenar en base a un atributo
+db.collectionName.find()
+.sort({
+    atributo: -1
+});
+~~~
+
+
 
 ## Operadores
 
@@ -86,9 +126,12 @@ db.collectionName.find({
 
 ## Condicionales
 
-| Nombre | shortcut | how use                                                      |
-| :----- | :------- | :----------------------------------------------------------- |
-| Y      | $and     | ...find({<br/>	$and: [<br/>		atributo: {$lt: 43},<br/>		...<br/>	]<br/>}) |
+| Nombre                                | shortcut | how use                                                      |
+| :------------------------------------ | :------- | :----------------------------------------------------------- |
+| Y                                     | $and     | ...find({<br/>	$and: [<br/>		atributo: {$lt: 43},<br/>		...<br/>	]<br/>}) |
+| O                                     | $or      | ...find({<br/>	$or: [<br/>		atributo: {$lt: 43},<br/>		...<br/>	]<br/>}) |
+| Esta  dentro de                       | $in      | db.collectionName.find({<br/>    atributo: {$in: [1,2..., valorFinal]},<br/>}) |
+| Si el atributo existe en el documento | $exists  | db.collectionName.find({<br/>    atributo: { $exists: true }<br/>}) |
 
 
 
