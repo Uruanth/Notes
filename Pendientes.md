@@ -1,5 +1,6 @@
 # Pendientes
 
+* [ ] Agregados Mongo
 * [ ] Profiler
 * [ ] Jacoco
 * [ ] JMeter
