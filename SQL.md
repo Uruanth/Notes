@@ -257,3 +257,10 @@ ALTER TABLE `productos`
 SELECT * FROM pg_catalog.pg_tables;
 ~~~
 
+# Documentación
+
+### JPA
+
+> * [ManyToMany](https://www.baeldung.com/jpa-many-to-many)
+> * [OneToOne](https://www.baeldung.com/jpa-one-to-one)
+> * [OneToMany](https://www.baeldung.com/hibernate-one-to-many)
