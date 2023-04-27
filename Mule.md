@@ -79,6 +79,20 @@ para pasar un string del payload a un date se realiza de la siguiente manera:
 ~~~typescript
 "1198/11/22" as Date {format : "yyyy/MM/dd"}
 "22-11-1998" as Date {format : "dd-MM-yyyy"}
+
+//Otros 
+now() as Date {format : "dd-MM-yyyy"}
+now() as Date {format : "dd-MM-yyyy"}
+
+now() as LocalDateTime {format : "HH:mm:ss.SSS"}
+now() as LocalDateTime {format : "yyyy-MM-dd HH:mm:ss.SSS"}
+
+now() as Time {format : "HH"}
+
+now() >> "UTC"
+now() >> "IST"
+now() >> "EST"
+(now() >> "UTC") as DateTime {format: "yyyy-MM-dd HH:mm:ss"}
 ~~~
 
 ### Funciones
