@@ -80,6 +80,8 @@ para pasar un string del payload a un date se realiza de la siguiente manera:
 "1198/11/22" as Date {format : "yyyy/MM/dd"}
 "22-11-1998" as Date {format : "dd-MM-yyyy"}
 
+"2000-09-22T08:33:12Z" as LocalDateTime {format : "yyyy-MM-dd'T'HH:mm:ss'Z'"}
+
 //Otros 
 now() as Date {format : "dd-MM-yyyy"}
 now() as Date {format : "dd-MM-yyyy"}
@@ -98,11 +100,88 @@ now() >> "EST"
 ### Funciones
 
 * now(), tiempo actual
+
 * sizeOf(arg), tamaño del array del argumento
+
 * isEmpty(arg), si el argumento esta vacio
+
 * upper(string), mayusculas del argumento
+
 * #["$(vars.variable)"], para hacer la variable dentro de un string
-* fun nameFunction(args) = (logica), 
+
+* fun nameFunction(args...) = (logica)
+
+* abs(*number*), Valor absoluto
+
+* avg([1,3]), promedio
+
+* ceil(3.2), da 4, valor entero siguiente
+
+* floor(3.2), da 3, valor antero anterior
+
+* round(1.2), aproxima el valor al entero mas cercano
+
+* min(*number[ ]*), el valor minimo del arreglo
+
+* max(*number[ ]*), el valor maximodel arreglo
+
+* [ {"a":1}, {"a":2}, {"a":3} ] minBy (item) -> item.a, el minimo de acuerdo a un atributo especifico 
+
+* [ {"a":1}, {"a":2}, {"a":3} ] maxBy (item) -> item.a, el maximo de acuerdo a un atributo especifico 
+
+* isEven(*number*), retorna true o false si el numero es par o no.
+
+* isOdd(*number*), retorna true o false si el numero es imparo no.
+
+* isInteger(*numer*)
+
+* isDecimal(*number*)
+
+* isBlanj(*arg*)
+
+* isEmpty(*arg*)
+
+* lower(*string*), retorna la cadena en minusculas
+
+* upper(*string*), retorna la cadena en mayusculas
+
+* ***string*** matches(*Regex*), compara contra una exprecion regex
+
+* ***admin123*** replace "123" with("ID"), da como resultado ***adminID***enser
+
+* sizeOf(array[] | object), retorna la cantidad de elementos del argumento1
+
+* namesOf(***obj***), nombres de los atributos del objeto
+
+* entriesOf(***obj***), regresa un objeto por cada entrada del objeto que se pase como argmento, { 
+
+  key: nombrePropiedad, 
+
+  value: valorPropiedad, 
+
+  atributes: {atriutos}
+
+  }
+
+* keysOf(***obj***), nombres de los atributos del objeto
+
+* valuesOf(***obj***) valores de los atributos del objeto
+
+* map(item, indexObject) -> { }
+
+* map { 
+
+  atributo1: $  //El signo dolar hace referencia al item en los atributos del map
+
+  atributo2: $$  //El signo doble dolar hace referencia al index en los atributos del map
+
+  }
+
+* mapObject(value, key, index) -> { }
+
+* filter(item, indexObject) -> { }
+
+* filterObject(item, indexObject) -> { }
 
 ## MUnit
 
