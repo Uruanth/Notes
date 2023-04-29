@@ -4,24 +4,24 @@
 
 ### map
 
-~~~java
+```java
 payload map ((item, index) -> {
-	id: item.id,
-	correo: item.correo default "",
-	apellido: item.apellido default "",
-	celular: item.celular default "",
-	nombre: item.nombre default "",
-	clave: item.clave default ""
+    id: item.id,
+    correo: item.correo default "",
+    apellido: item.apellido default "",
+    celular: item.celular default "",
+    nombre: item.nombre default "",
+    clave: item.clave default ""
 })
-~~~
+```
 
 ### flatten(payload..payload)
 
 Aplanar un arreglo
 
-~~~java
+```java
 flatten(payload..payload)
-~~~
+```
 
 ### CorrelationId
 
@@ -56,27 +56,27 @@ El objeto error tiene dos atributos importantes
 
 ### Selectores
 
-| Selector       | Use                                                          | How it works                                                 |
-| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Single-value   | `.keyName`                                                   | Any type of value that belongs to a matching key             |
-| Multi-value    | `.*keyName`                                                  | Array of values of any matching keys                         |
-| Descendants    | `..keyName`                                                  | Array of values of any matching descendant keys              |
-| Dynamic        | See [Dynamic Selector](https://docs.mulesoft.com/dataweave/2.4/dataweave-selectors#dynamic_selector). |                                                              |
-| Key-value pair | `.&keyName`                                                  | Object with the matching key                                 |
-| Index          | `[<index>]`                                                  | Value of any type at selected array index. Use negative numbers to index from the end of an array, for example, `-1` for the last element in the array. Use of numbers beyond the array size returns `null`. |
-| Range          | `[<index> to <index>]`                                       | Array with values from selected indexes                      |
-| XML attribute  | `@`, `.@keyName`                                             | String value of the selected attribute                       |
-| Namespace      | `keyName.#`                                                  | String value of the namespace for the selected key           |
-| Key present    | `keyName?`, `keyName.@type?`                                 | Boolean (`true` if the selected key of an object or XML attribute is present, `false` if not) |
-| Assert present | `keyName!`                                                   | String: Exception message if the key is not present          |
-| Filter         | `[?(boolean_expression)]`                                    | Array or object containing key-value pairs *if* the DataWeave expression returns `true`. Otherwise, returns the value `null`. |
-| Metadata       | `.^someMetadata`                                             | Returns the value of specified metadata for a Mule payload, variable, or attribute. The selector can return the value of class (`.^class`), content length (`.^contentLength`), encoding (`.^encoding`), mime type (`.^mimeType`), media type (`.^mediaType`), raw (`.^raw`), and custom (`.^myCustomMetadata`) metadata. For details, see [Extract Data](https://docs.mulesoft.com/dataweave/2.4/dataweave-cookbook-extract-data#selector_metadata). |
+| Selector       | Use                                                                                                   | How it works                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Single-value   | `.keyName`                                                                                            | Any type of value that belongs to a matching key                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Multi-value    | `.*keyName`                                                                                           | Array of values of any matching keys                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Descendants    | `..keyName`                                                                                           | Array of values of any matching descendant keys                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Dynamic        | See [Dynamic Selector](https://docs.mulesoft.com/dataweave/2.4/dataweave-selectors#dynamic_selector). |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Key-value pair | `.&keyName`                                                                                           | Object with the matching key                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Index          | `[<index>]`                                                                                           | Value of any type at selected array index. Use negative numbers to index from the end of an array, for example, `-1` for the last element in the array. Use of numbers beyond the array size returns `null`.                                                                                                                                                                                                                                          |
+| Range          | `[<index> to <index>]`                                                                                | Array with values from selected indexes                                                                                                                                                                                                                                                                                                                                                                                                               |
+| XML attribute  | `@`, `.@keyName`                                                                                      | String value of the selected attribute                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Namespace      | `keyName.#`                                                                                           | String value of the namespace for the selected key                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Key present    | `keyName?`, `keyName.@type?`                                                                          | Boolean (`true` if the selected key of an object or XML attribute is present, `false` if not)                                                                                                                                                                                                                                                                                                                                                         |
+| Assert present | `keyName!`                                                                                            | String: Exception message if the key is not present                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Filter         | `[?(boolean_expression)]`                                                                             | Array or object containing key-value pairs *if* the DataWeave expression returns `true`. Otherwise, returns the value `null`.                                                                                                                                                                                                                                                                                                                         |
+| Metadata       | `.^someMetadata`                                                                                      | Returns the value of specified metadata for a Mule payload, variable, or attribute. The selector can return the value of class (`.^class`), content length (`.^contentLength`), encoding (`.^encoding`), mime type (`.^mimeType`), media type (`.^mediaType`), raw (`.^raw`), and custom (`.^myCustomMetadata`) metadata. For details, see [Extract Data](https://docs.mulesoft.com/dataweave/2.4/dataweave-cookbook-extract-data#selector_metadata). |
 
 ### Date
 
 para pasar un string del payload a un date se realiza de la siguiente manera:
 
-~~~typescript
+```typescript
 "1198/11/22" as Date {format : "yyyy/MM/dd"}
 "22-11-1998" as Date {format : "dd-MM-yyyy"}
 
@@ -95,7 +95,7 @@ now() >> "UTC"
 now() >> "IST"
 now() >> "EST"
 (now() >> "UTC") as DateTime {format: "yyyy-MM-dd HH:mm:ss"}
-~~~
+```
 
 ### Funciones
 
@@ -154,13 +154,13 @@ now() >> "EST"
 * namesOf(***obj***), nombres de los atributos del objeto
 
 * entriesOf(***obj***), regresa un objeto por cada entrada del objeto que se pase como argmento, { 
-
+  
   key: nombrePropiedad, 
-
+  
   value: valorPropiedad, 
-
+  
   atributes: {atriutos}
-
+  
   }
 
 * keysOf(***obj***), nombres de los atributos del objeto
@@ -170,11 +170,11 @@ now() >> "EST"
 * map(item, indexObject) -> { }
 
 * map { 
-
+  
   atributo1: $  //El signo dolar hace referencia al item en los atributos del map
-
+  
   atributo2: $$  //El signo doble dolar hace referencia al index en los atributos del map
-
+  
   }
 
 * mapObject(value, key, index) -> { }
@@ -182,6 +182,18 @@ now() >> "EST"
 * filter(item, indexObject) -> { }
 
 * filterObject(item, indexObject) -> { }
+
+* distinctBy( item, index ) -> item, retorna los item sin duplicados, compara el objeto completo
+
+* orderBy( item, index ) -> item, va ordenando los objetos del array de acuerdo
+  
+  orderBy \$.atributo, ordenar por atributo de manera ascendente por defectoorderBy -$.atributo, ordenar por atributo de manera descendente
+
+* groupBy( item, index ) -> { }
+  
+  groupBy \$.atributo, agrupar por atributo, regresa un nuevo arreglo por cada valor que pueda tomar el atributo
+
+* fooArray filter(\$.atributo == bar).atributo2 joinBy ", ", toma todos los atributos2 de cada objeto y los regresa como una cadena separadas por $', '$
 
 ## MUnit
 
