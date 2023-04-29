@@ -59,7 +59,18 @@ flatten(aa)
 
 ### Pluck
 
-$Probando$
+pluck ( value, key, index ) , 
+
+```java
+var aa = {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    }
+
+aa pluck $$$ //Obtener los index de los atributos del objeto
+aa pluck $$ //Obtener los nombres de los atributos del objeto
+aa pluck $ //Obtener los valores de los atributos del objeto
+```
 
 
 
@@ -111,6 +122,14 @@ El objeto error tiene dos atributos importantes
 | Assert present | `keyName!`                                                                                            | String: Exception message if the key is not present                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Filter         | `[?(boolean_expression)]`                                                                             | Array or object containing key-value pairs *if* the DataWeave expression returns `true`. Otherwise, returns the value `null`.                                                                                                                                                                                                                                                                                                                         |
 | Metadata       | `.^someMetadata`                                                                                      | Returns the value of specified metadata for a Mule payload, variable, or attribute. The selector can return the value of class (`.^class`), content length (`.^contentLength`), encoding (`.^encoding`), mime type (`.^mimeType`), media type (`.^mediaType`), raw (`.^raw`), and custom (`.^myCustomMetadata`) metadata. For details, see [Extract Data](https://docs.mulesoft.com/dataweave/2.4/dataweave-cookbook-extract-data#selector_metadata). |
+
+### Formato decimales
+
+Formato cantidad de descimales de un numero, en este caso con dos decimales
+
+```java
+20.3844 as String { format: ".0#"}
+```
 
 ### Date
 
