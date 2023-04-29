@@ -17,11 +17,51 @@ payload map ((item, index) -> {
 
 ### flatten(payload..payload)
 
-Aplanar un arreglo
+Aplanar los objetos internos de un arreglo
 
 ```java
-flatten(payload..payload)
+var aa = [
+    {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    },
+    {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    },
+    [
+        {
+            atrinuto1: 123,
+            atributo2: "addasd"
+        }
+    ]
+]
+
+
+flatten(aa)
+
+//El resultado seria 
+ [
+    {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    },
+    {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    },
+    {
+        atrinuto1: 123,
+        atributo2: "addasd"
+    }   
+]
 ```
+
+### Pluck
+
+$Probando$
+
+
 
 ### CorrelationId
 
