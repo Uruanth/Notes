@@ -267,3 +267,100 @@ Framework de pruebas unitarias para Mulesoft
   * uriParams
   * queryParams
 * payload, el cuerpo de la petición/respuesta
+
+
+
+### Parametrizados
+
+Para usar variables definidas como parametrizables en la configuracion global se puede mediante la funcion `Mule::p('nombreParametro')`.
+
+Para el mock puede ser necesario usarlo de la manera `read(Mule::p('nombreParametro'))`.
+
+En caso de que sean valores JSON o algo que no se pueda mediante el XML, se puede parametrizar desde un archivo yaml, este debe ser creado en `src/test/resources`, y ser seleccionado en la configuracion global de parametrizacion.
+
+
+
+## MUnit - Mule Palette
+
+### Set Event
+
+Componente para setear valores en el Mule Event, como payload, atributos, error o variables.
+
+![image-20230429142117679](.Mule\MUnitSetEvent)
+
+### Test
+
+Crea un nuevo contexto para un test
+
+## MUnit Tools - Mule Palette
+
+### AssertEquals
+
+Se utiliza para realizar las acerciones del test
+
+### AssertThat
+
+Hace la acercion con una expresion o funcion
+
+![image-20230429151111876](.Mule\MUnitToolsAssertThat)
+
+### AssertExpression
+
+Hace la acercion con una expresion o funcion
+
+![image-20230429160344844](.Mule\MUnitToolsAssertExpression)
+
+### Verify call
+
+Validar cuantas veces fue llamado algo o si fue llamado, su interfaz es similar a la de un mock
+
+### Spy
+
+ Va despues de un mock, y tiene dos secciones, *before call* y *after call*, cada una acepta asserciones para verificar el llamado de un proceso en especifico, no tiene que ser necesariamente el que se mockea
+
+## Importar un archivo en Dataweave
+
+El archivo debe ser de extencion `.dwl`
+
+```js
+//Archivo.dwl
+import * from dw::test::Asserts
+---
+ payload must equalTo({
+    "message": "Probando MUnit"
+})
+```
+
+
+
+```python
+%dw 2.0
+import carpeta::archivo
+
+---
+archivo::main({ args... })
+```
+
+importar tambien datos como por ejemplo un el attributes del Mule event desde un archivo `.dwl`
+
+```js
+//Archivo.dwl
+{
+    "queryParams": {
+        "param1": 123,
+        "param2": "Prueba"
+    }
+}
+```
+
+Desde un setEvent se podria llamar asi
+
+![image-20230429180744524](.Mule\MUnitSetEvent2)
+
+
+
+## Mocks
+
+Se usa el componente Mock when, cuando se selecciona el procesador, es el componente o seccion que se va a mockear y se recomienda hacerlo mediante el `doc:id`. 
+
+En la sección `Then Return` es donde se asignan los valores al Mule event
