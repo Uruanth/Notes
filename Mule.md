@@ -288,8 +288,6 @@ Crea un nuevo contexto para un test
 
 ## MUnit Tools - Mule Palette
 
-
-
 Se utiliza para realizar las acerciones del test
 
 ### AssertThat
