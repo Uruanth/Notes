@@ -72,8 +72,6 @@ aa pluck $$ //Obtener los nombres de los atributos del objeto
 aa pluck $ //Obtener los valores de los atributos del objeto
 ```
 
-
-
 ### CorrelationId
 
 Es un objeto predefinido en Mule, que viene en la cabeceras del listener, si no viene en la petición lo crea automaticamente
@@ -294,8 +292,6 @@ Framework de pruebas unitarias para Mulesoft
   * queryParams
 * payload, el cuerpo de la petición/respuesta
 
-
-
 ### Parametrizados
 
 Para usar variables definidas como parametrizables en la configuracion global se puede mediante la funcion `Mule::p('nombreParametro')`.
@@ -304,15 +300,13 @@ Para el mock puede ser necesario usarlo de la manera `read(Mule::p('nombreParame
 
 En caso de que sean valores JSON o algo que no se pueda mediante el XML, se puede parametrizar desde un archivo yaml, este debe ser creado en `src/test/resources`, y ser seleccionado en la configuracion global de parametrizacion.
 
-
-
 ## MUnit - Mule Palette
 
 ### Set Event
 
 Componente para setear valores en el Mule Event, como payload, atributos, error o variables.
 
-![image-20230429142117679](.Mule\MUnitSetEvent)
+![image-20230429142117679](.Mule\MUnitSetEvent.jpg)
 
 ### Test
 
@@ -320,21 +314,19 @@ Crea un nuevo contexto para un test
 
 ## MUnit Tools - Mule Palette
 
-### AssertEquals
-
 Se utiliza para realizar las acerciones del test
 
 ### AssertThat
 
 Hace la acercion con una expresion o funcion
 
-![image-20230429151111876](.Mule\MUnitToolsAssertThat)
+![image-20230429151111876](.Mule\MUnitToolsAssertThat.jpg)
 
 ### AssertExpression
 
 Hace la acercion con una expresion o funcion
 
-![image-20230429160344844](.Mule\MUnitToolsAssertExpression)
+![image-20230429160344844](.Mule\MUnitToolsAssertExpression.jpg)
 
 ### Verify call
 
@@ -356,8 +348,6 @@ import * from dw::test::Asserts
     "message": "Probando MUnit"
 })
 ```
-
-
 
 ```python
 %dw 2.0
@@ -381,9 +371,7 @@ importar tambien datos como por ejemplo un el attributes del Mule event desde un
 
 Desde un setEvent se podria llamar asi
 
-![image-20230429180744524](.Mule\MUnitSetEvent2)
-
-
+![image-20230429180744524](.Mule\MUnitSetEvent2.jpg)
 
 ## Mocks
 
