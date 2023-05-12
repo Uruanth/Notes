@@ -4,59 +4,57 @@
 
 ### Generate a new project
 
- ~~~shell
+```shell
  ng new <nameApp>
- ~~~
+```
 
 ### Generate a module
 
-~~~shell
+```shell
 ng g m <nameModule>
-~~~
+```
 
 ### Generate a component
 
-~~~shell
+```shell
 ng g c <rute>/<nameComponent>
-~~~
+```
 
 ## Flags
 
 ### Without tests
 
-~~~shell
+```shell
 --skipTests  || --skip-tests
-~~~
+```
 
 ### In the same folder
 
-~~~shell
+```shell
 --flat
-~~~
+```
 
 ### Module with routes
 
-~~~shell
+```shell
 --routing
-~~~
+```
 
 ### Without style file
 
-~~~shell
+```shell
 --inline-style || -is || -s
-~~~
+```
 
 ### With route file
 
-~~~sh
+```sh
 ng g m <nameModule> --routing
-~~~
-
-
+```
 
 ## RouterModule
 
-~~~typescript
+```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { exampleComponent } from '<ruteComponent>';
@@ -66,15 +64,15 @@ const routes: Routes = [
         path: '',
         component: <nameComponent>,
         pathMatch: 'full'
-	},
-  	{
+    },
+      {
         path: 'path-url',
         component: exampleComponent
-	},
-  	{
+    },
+      {
         path: '**',
         redirect: 'path-url'
-	}
+    }
 ];
 
 @NgModule({
@@ -82,11 +80,11 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class WithRoutesRoutingModule { }
-~~~
+```
 
 ### Add roter module to app module
 
-~~~typescript
+```typescript
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -101,15 +99,13 @@ import { WithRoutesRoutingModule } from './with-routes-routing.module';
   ],
 })
 export class WithRoutesModule { }
-~~~
+```
 
 ### Add to component
 
-~~~html
+```html
 <router-outlet></router-outlet>
-~~~
-
-
+```
 
 ## PIPES
 
@@ -119,11 +115,11 @@ Los pipes solo transforman las variables de manera visual, no alteran el valor d
 
 Pipes only transform the visual shape of variables, they don't change the value of the variabe.
 
-~~~html
+```html
 <h1>
     {{ nameVar | namePipe }}
 </h1>
-~~~
+```
 
 ### GENERIC PIPES
 
@@ -134,7 +130,7 @@ Pipes only transform the visual shape of variables, they don't change the value 
 * json
 * date
 
-~~~html
+```html
 <!-- Formato fecha normal -->
 {{ value | date }}
 <!-- Formato fecha formato 'short' -->
@@ -145,16 +141,15 @@ Pipes only transform the visual shape of variables, they don't change the value 
 {{ value | date:'MM' }}
 <!-- Formato fecha formato personalizado -->
 {{ value | date: 'MM dd, yyyy' }}
-~~~
+```
 
 #### Cambiar idioma por defecto de  los pipes
 
 #### Change the default language of pipes
 
-En el app module:	|| In the app module:
+En el app module:    || In the app module:
 
-~~~typescript
-
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -190,54 +185,53 @@ registerLocaleData( localeFr );
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-~~~
+```
 
 En el pipe || In the pipe 
 
-~~~html
+```html
 <!-- Formato fecha idioma ingles -->
 {{ value | date: 'MM dd, yyyy':'':'en' }}
 <!-- Formato fecha idioma frances, esto funciona porque se importo y se registro en el app moduel -->
 {{ value | date: 'MM dd, yyyy':'':'fr' }}
-~~~
+```
 
 * Decimal
-
-  ~~~html
+  
+  ```html
   <!-- Formato decimal -->
   <!-- 1 entero y los decimales en un rango de 2 a 2 (cantidad de decimales no valor de este) -->
   {{ value | number:'1.2-2'  }}
-  ~~~
+  ```
 
 * Currency
-
-  ~~~html
+  
+  ```html
   <!-- Formato moneda -->
   <!-- tipo moneda - tipo simbolo - cantidad de enteros y decimales -->
   {{ value | currency:'COP':'symbol-narrow':'1.0-4'  }}
-  ~~~
+  ```
 
 * Percent
-
-  ~~~html
+  
+  ```html
   <!-- Formato moneda -->
   <!--  cantidad de enteros y decimales -->
   {{ value | percent:'2.2-2' }}
-  ~~~
+  ```
 
 * i18nSelect:
-
+  
   Dependiendo del genero que tenga la variable, sera la opción mostrada, el argumento de mapeado es obligatorio.
-
-  ~~~html
+  
+  ```html
   <!-- Formato i18nSelect -->
   {{ genero | i18nSelect:mapeado }}
-  ~~~
-
+  ```
+  
   **component**
-
-  ~~~typescript
+  
+  ```typescript
   nombre: string = 'asdadasd';
   genero: string = 'femenino';
   
@@ -245,20 +239,20 @@ En el pipe || In the pipe
       'femenino': 'opcion 1',
       'masculino': 'opcion 2'
   }
-  ~~~
+  ```
 
 * i18nPlural
-
+  
   Dependiendo de la respuesta de clientes.length va usar una de las opciones del mapeado, el other es cualquier otra opcion posible, y si dentro de la cadena se usa el #, muestra el valor que recibe el pipe, en este caso el valor que tenga clientes.length
-
-  ~~~html
+  
+  ```html
   <!-- Formato i18nPlural -->
   {{ clientes.length | i18nPlural:mapeado }}
-  ~~~
-
+  ```
+  
   **component**
-
-  ~~~typescript
+  
+  ```typescript
   clientes: string[] = ['Maria', 'Juan', 'Pedro'];
   
   mapeado = {
@@ -266,33 +260,26 @@ En el pipe || In the pipe
       '=1': 'opcion 2',
       'other': 'opcion 4 #'
   }
-  
-  ~~~
+  ```
 
 * slice
-
-  ~~~html
+  
+  ```html
   <!-- toma los valores desde 0 a 2 del arreglo, si solo se deja el primer atributo es desde donde empieza y toma el resto del arreglo, el segundo argumento es el indice hasta cual debe llegar pero no lo incluye -->
   {{ clientes | slice:0:2 }}
-  ~~~
+  ```
 
 * KeyValue
-
-  ~~~html
-   
-  ~~~
-
   
-
-
-
-
+  ```html
+  
+  ```
 
 ## Modules
 
 ### Normal module
 
-~~~typescript
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -306,13 +293,11 @@ import { BrowserModule } from '@angular/platform-browser';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-~~~
-
-
+```
 
 ### Modules for exporting components only
 
-~~~typescript
+```typescript
 import { <nameComponent> } from '<url component>';
 import { NxWelcomeComponent } from './nx-welcome.component';
 
@@ -323,46 +308,42 @@ import { NxWelcomeComponent } from './nx-welcome.component';
   ]
 })
 export class ModuleForExportingOnly {}
-~~~
+```
 
 ## Formulario reactivo
 
 * Importar  `ReactiveFormsModule` 
 * Crear el FormGoup en nuestro TS
 
-~~~typescript
+```typescript
   public miFormulario: FormGroup = new FormGroup({
     'nombre': new FormControl('Valor inicial')
   });
-~~~
+```
 
-​	El atributo nombre se debe linkear en el formulario del archivo HTML usando la directiva formControlName
+​    El atributo nombre se debe linkear en el formulario del archivo HTML usando la directiva formControlName
 
-~~~html
+```html
  <input
-	type="text"
-	formControlName = "nombre"
-	class="form-control"
+    type="text"
+    formControlName = "nombre"
+    class="form-control"
 />
-~~~
-
-
+```
 
 Otra manera de crear el FormGroup
 
-~~~typescript
+```typescript
  public miFormulario: FormGroup = this.fb.group({
     'nombre': ['Valor inicial', [Validators.required]],
     'precio': [0],
     'exitencias': [0],
   });
-~~~
-
-
+```
 
 ## Peticiones x-ndjson
 
-~~~typescript
+```typescript
 public async streamm() {
     const response = await fetch('http://localhost:8080', {
       method: 'GET',
@@ -384,8 +365,6 @@ public async streamm() {
     console.log('response fully received');
 
   }
-~~~
-
-
+```
 
 10
