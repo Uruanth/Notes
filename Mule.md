@@ -78,6 +78,8 @@ Es un objeto predefinido en Mule, que viene en la cabeceras del listener, si no 
 
 ## UriParam
 
+
+
 \<Path>foo/{param1}/bar/{param2}
 
 ## Varios
@@ -89,6 +91,30 @@ Para obtener el valor de un atributo en una etiqueta xml se antepone el @ para i
 ### Variables de entorno
 
 Para llamar una variable de entorno es mendiate `${ruta.propiedad}` y si se hace desde DataWeave `Mule::p('ruta.propiedad')`
+
+## Secure properties
+
+Donde Blowfish es el algoritmo, CBC es el modo y mulesoft es la llave  
+
+```shell
+java -cp secure-properties-tool.jar com.mulesoft.tools.SecurePropertiesTool string encrypt Blowfish CBC mulesoft "some value to encrypt"
+```
+
+Para general la configuracion global, toca agregar el modulo de secure properties de Mule, y en el `yaml` se debe de colocar el atributo entre comillas y dentro de estas comillas dentro de `![<valor encriptado>]`
+
+Para llamar una propiedad encriptada en las configuraciones se hace con `${secure::key}`.
+
+Para llamar una propiedad encriptada mediante dateweave es con `Mule::p('secure::key')`.
+
+La llave para desencriptar se puede pasar como variable de entorno al momento de ejecutar la API, en la configuracion del yaml seria asi
+
+![image-20230504144456865](.Mule\secureProperties1.png)
+
+Y el argumento para correr debe ser asi
+
+![image-20230504144559804](.Mule\secureProperties2.png)
+
+Donde `enc.key` es la variable de entorno.
 
 ## Errores
 
@@ -352,3 +378,51 @@ Desde un setEvent se podria llamar asi
 Se usa el componente Mock when, cuando se selecciona el procesador, es el componente o seccion que se va a mockear y se recomienda hacerlo mediante el `doc:id`. 
 
 En la sección `Then Return` es donde se asignan los valores al Mule event
+
+
+
+
+
+# Security Schemas
+
+## OAuth 2.0
+
+```yaml
+securitySchemes:
+  oauth2.0:
+    type: OAuth 2.0
+    describedBy:
+            headers:
+                Authorization:
+                    description: |
+                      Used to send a valid OAuth 2 access token. Do not use
+                      with the "access_token" query string parameter.
+                    type: string
+            queryParameters:
+                access_token:
+                    description: |
+                      Used to send a valid OAuth 2 access token. Do not use together with
+                      the "Authorization" header
+                    type: string
+            responses:
+                401:
+                    description: |
+                        Bad or expired token.
+                403:
+                    description: |
+                        Bad OAuth request.
+    settings:
+      authorizationUri: http://0.0.0.0:8081/authorize
+      accessTokenUri: http://0.0.0.0:8081/access-token
+      authorizationGrants: [authorization_code, password, client_credentials, implicit]
+```
+
+## Basic
+
+```yaml
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    description: La API esta protegida por autenticación basica
+```
+
