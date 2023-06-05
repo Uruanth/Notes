@@ -1,10 +1,10 @@
-#  RxJS
+# RxJS
 
 * Cuando una variable termina en "$" es un estándar para notar variables que son observables.
 
 ## A quien me puedo suscribir
 
-~~~typescript
+```typescript
 this.obs$ = new Observable<String>(subs => {
       subs.next('hola');
       subs.next('Mundo');
@@ -20,20 +20,20 @@ this.obs$ = new Observable<String>(subs => {
       subs.next('hola');
       subs.next('Mundo');
     });
-~~~
+```
 
 ## Formas de suscribirme
 
-~~~typescript
+```typescript
 this.obs$.subscribe(
       valor => console.log('valor: ', valor),
       error => console.warn('error: ', error),
       () => console.log('complete')
     );
-    
+
     console.log('[subscribe2]...')
     this.obs$.subscribe(this.obsevador);
-	console.log('[subscribe3]...')
+    console.log('[subscribe3]...')
     this.obs$.subscribe({
         next?: value => console.log(value), 
         error: null, 
@@ -60,13 +60,13 @@ this.obs$.subscribe(
     }, 10000)
 
   }
-~~~
+```
 
 ## of  /  from
 
 from recibe un array como argumento y devuelve sus valores en el flujo 
 
-~~~typescript
+```typescript
 pruebaOf() {
     //emisor que recibe todo tipo de argumentos
     const obs1$ = of(1, 2, 3, 4, 5, 6, function(){}, 'asdasdas');
@@ -82,13 +82,13 @@ pruebaOf() {
     );
     console.log('[fin]')
   }
-~~~
+```
 
 ## fromEvent
 
 Escuchar eventos
 
-~~~typescript
+```typescript
 pruebaFromEvent(){
     // const src1$ = fromEvent( document, 'click');
     // const src2$ = fromEvent( document, 'keyup');
@@ -115,12 +115,11 @@ pruebaFromEvent(){
       console.log(evento.key);
     });
   }
-
-~~~
+```
 
 ## range
 
-~~~typescript
+```typescript
  pruebaRange(){
     // const source$ = of<number>(1,2,3,4,5,6);
     /**
@@ -137,13 +136,13 @@ pruebaFromEvent(){
     console.log('[range] fin')
 
   }
-~~~
+```
 
 ## interval
 
 Son observables asincronos por naturaleza, periodo por default es 0, el intervalo no da el complete.
 
-~~~typescript
+```typescript
   const observer = {
       next: value => console.log('[interval]:', value),
       complete: () => console.log('[complete]')
@@ -153,24 +152,24 @@ Son observables asincronos por naturaleza, periodo por default es 0, el interval
     console.log('[interval] inicio')
      interval$.subscribe( observer );
     console.log('[interval] fin')
-~~~
+```
 
 ## timer
 
-~~~typescript
+```typescript
 timer(2000); //envia datos en 2 seg  y luego completa el observable
-~~~
+```
 
 configuraciones especiales
 
-~~~typescript
+```typescript
 //Inicia un interval que inicia en 2000 ms
 const timer$ = timer(2000,1000); 
-~~~
+```
 
 ## asyncSecheduler
 
-~~~typescript
+```typescript
 testAsyncScheduler(){
     const saludar = () => console.log('[scheduler] hola mundo');
     const saludar2 = nombre => console.log('[scheduler] hola', nombre);
@@ -193,14 +192,13 @@ testAsyncScheduler(){
     asyncScheduler.schedule(()=> sub$.unsubscribe(), 10000);
 
   }
-
-~~~
+```
 
 ## Subject
 
 Es un observador al cual se le pueden suscribir otros observer
 
-~~~typescript
+```typescript
  /**
    * 1- Casteo multiple
    * 2- Es un observer
@@ -209,13 +207,11 @@ Es un observador al cual se le pueden suscribir otros observer
 const uu = this.intervalo$.subscribe(this.subject$);
 const subs1 = this.subject$.subscribe(subs => console.log('subs1', subs));
 const subs2 = this.subject$.subscribe(subs => console.log('subs2', subs));
-~~~
-
-
+```
 
 ## otros
 
-~~~typescript
+```typescript
  otrosOfFrom() {
     const observer = {
       next: value => console.log('[ofFrom]:', value),
@@ -245,7 +241,7 @@ const subs2 = this.subject$.subscribe(subs => console.log('subs2', subs));
 
 
   }
-~~~
+```
 
 # Operadores
 
@@ -253,18 +249,18 @@ const subs2 = this.subject$.subscribe(subs => console.log('subs2', subs));
 
 ## map
 
-~~~typescript
+```typescript
 range(1,2).pipe(
-	map<number, number> (val => val*10) //el primer generico indica que entra y el segundo que sale del map
+    map<number, number> (val => val*10) //el primer generico indica que entra y el segundo que sale del map
 )
 .subscribe( console.log );
-~~~
+```
 
 ## pluck
 
 retorna el valor de un atributo dado, devuelve el 2 de este objeto { 'v' : 2 } si se usa como argumento 'v';
 
-~~~typescript
+```typescript
 import { pluck } from 'rxjs/operators';
 
 const keyup$ = fromEvent<KeyboardEvent>(document, 'keyup');
@@ -281,13 +277,13 @@ const keyupPluck$ = keyup$.pipe(
     pluck('atributoPadre', 'atributoHijo')
 )
 .subscribe( console.log )
-~~~
+```
 
 ## mapTo
 
 Transforma los elementos del flujo en lo que se pone como argumento.
 
-~~~typescript
+```typescript
 testMapTo() {
     const keyup$ = fromEvent<KeyboardEvent>(document, 'keyup');
     const keyupMapTo$ = keyup$.pipe(
@@ -295,7 +291,7 @@ testMapTo() {
     )
       .subscribe(console.log)
   }
-~~~
+```
 
 ## filter
 
@@ -303,18 +299,18 @@ Igual que en java
 
 ## Encadenar operadores
 
-~~~typescript
+```typescript
     const keyupMapTo$ = keyup$.pipe(
       map('target'),
       filter('codigo filter') 
     )
-~~~
+```
 
 ## tap
 
 El tap permite recibir observables, y seguir el proceso de emision
 
-~~~typescript
+```typescript
  testTap(){
     const numeros$ = range(2,7).pipe(
       tap(x => console.log('[tap]:', x)),
@@ -327,13 +323,13 @@ El tap permite recibir observables, y seguir el proceso de emision
 
     numeros$.subscribe(val => console.log('[tapSubscribe]:', val))
   }
-~~~
+```
 
 ## reduce
 
 va acumulando todo el flujo de acuerdo a la funcion, y se da como valor inicial el 0, solo emite el resultado cuando el observable se complete.
 
-~~~typescript
+```typescript
 reduce( (acumulado, actual) => acumulado + actual, 0);
 
 testReduce(){
@@ -346,13 +342,13 @@ testReduce(){
       complete: ()=> console.log('[reduce]: complete')
     })
   }
-~~~
+```
 
 ## scan
 
 El scan va retornando cada acumulado y no solo cuando se complete el observable
 
-~~~typescript
+```typescript
 scan( (acumulado, actual) => acumulado + actual, 0);
 
 testScan(){
@@ -365,7 +361,7 @@ testScan(){
       complete: ()=> console.log('[scan]: complete')
     });
   }
-~~~
+```
 
 # Operadores no tan comunes
 
@@ -373,31 +369,31 @@ testScan(){
 
 Toma solo la cantidad de elementos dichos y luego completa el obsarvable.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	take(3)
+    take(3)
 ).subscribe( console.log )
-~~~
+```
 
 ## first
 
 Completa el obsevable despues del primer valor
 
-~~~typescript
+```typescript
 observable$.pipe(
-	first()
+    first()
 ).subscribe( console.log )
-~~~
+```
 
 aqui el first solo va a emitir el valor cuando haya alguno que cumpla la condicion e imediatamente completa el observable, el observable puedue seguir enviando datos pero el first no permite que pasen.
 
 Es como un filter. 
 
- ~~~typescript
+```typescript
  observable$.pipe(
- 	first(value => value>0)
+     first(value => value>0)
  ).subscribe( console.log )
- ~~~
+```
 
 ## takeWhile
 
@@ -405,17 +401,17 @@ Recibe elementos hasta que la condicion sea falsa, cuando sea falsa se completa 
 
 Si se desea recibir el valor que hizo falsa la condicion se asigna un segundo argumento como verdadero, por defecto es falso
 
-~~~typescript
+```typescript
 observable$.pipe(
-	takeWhile(value => value>0, true)
+    takeWhile(value => value>0, true)
 ).subscribe( console.log )
 
 //Desestructurando
 observable$.pipe(
     map( ({x,y}) => ({x,y}) )
-	takeWhile( ({y}) => y > 0, true)
+    takeWhile( ({y}) => y > 0, true)
 ).subscribe( console.log )
-~~~
+```
 
 ## takeUntil
 
@@ -423,61 +419,61 @@ Se emiten valores hasta que se reciba otro observable.
 
 En este caso cuando se de un clic en el documento se completara el "observable$"
 
-~~~typescript
+```typescript
 observable$.pipe(
-	takeUntil(fromEvent(documento,'click'))
+    takeUntil(fromEvent(documento,'click'))
 ).subscribe( console.log )
-~~~
+```
 
 ## Skip
 
 evita que sigan en el flujo el numero indicado de elementos, omite la cantidad especifica de elementos en el orden de llegada.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	skip(3)
+    skip(3)
 ).subscribe( console.log )
-~~~
+```
 
 ## distinct
 
 Permite le paso de todos los elementos que sean diferentes en el flujo, ninguno continua si ya se emitio
 
-~~~typescript
+```typescript
 observable$.pipe(
-	distinct()
+    distinct()
 ).subscribe( console.log )
 
 //En caso de objetos para poder identificar cuales ya se emitieron
 observable$.pipe(
-	distinct(val => val.atributo)
+    distinct(val => val.atributo)
 ).subscribe( console.log )
-~~~
+```
 
 ## distinctUntilChanged
 
 Emite elementos si el valor anterior es diferente al que se esta emitiendo v 
 
-~~~typescript
+```typescript
 observable$.pipe(
-	distinctUntilChanged()
+    distinctUntilChanged()
 ).subscribe( console.log )
 
 //En caso de objetos para poder identificar si el objeto anterior es igual al actual mediante un atributo
 observable$.pipe(
-	distinct( (anterior, actual) => anterior.atributo === actual.atributo)
+    distinct( (anterior, actual) => anterior.atributo === actual.atributo)
 ).subscribe( console.log )
-~~~
+```
 
 ## distinctUntilKeyChanged
 
 Evita la emision de un elemento que contenga la misma propiedad k que el anterior
 
-~~~typescript
+```typescript
 observable$.pipe(
-	distinctUntilKeyChanged("k")
+    distinctUntilKeyChanged("k")
 ).subscribe( console.log )
-~~~
+```
 
 # Operadores que trabajan con el tiempo
 
@@ -487,40 +483,40 @@ Controla la cantidad de msjs, solo continua el flujo con el ultimo elemento que 
 
 En este caso solo se mostraran los elementos que tengan un segundo de diferencia o mas
 
-~~~typescript
+```typescript
 observable$.pipe(
-	debounceTime(1000)
+    debounceTime(1000)
 ).subscribe( console.log )
-~~~
+```
 
 ## throttleTime
 
 Emite el primer elemento que se hizo en un lapso de tiempo de 1 seg con la anterior emision. Lo contrario del debounceTime.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	throttleTime(1000)
+    throttleTime(1000)
 ).subscribe( console.log )
 
 //Si ambas son falsas emite el primero nada mas
 //Los dos verdaderos emite el primero y el ultimo
 observable$.pipe(
-	throttleTime(1000, asyncScheduler, {
+    throttleTime(1000, asyncScheduler, {
         leading: false,
         trailing:true
     })
 ).subscribe( console.log )
-~~~
+```
 
 ## sampleTIme
 
 Cada tiempo dado emite un elemento, este elemento sera el ultimo que se dio en ese lapso de tiempo, si no hubo un evento no emite nada.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	sampleTime(1000)
+    sampleTime(1000)
 ).subscribe( console.log )
-~~~
+```
 
 ## sample
 
@@ -528,11 +524,11 @@ observable$.pipe(
 
 Se emite el ultimo elemento recibido cuando un evento es emitido por un segundo observer, en este caso "observable2$"
 
-~~~typescript
+```typescript
 observable$.pipe(
-	sample(observable2$)
+    sample(observable2$)
 ).subscribe( console.log )
-~~~
+```
 
 ## auditATime
 
@@ -540,11 +536,11 @@ Espera a que se empiecen a emitir elementos, cuando el primero es emitido empiez
 
 Si el observer es completado durante el lapso de tiempo establecido no se emitira nada.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	sample(observable2$)
+    sample(observable2$)
 ).subscribe( console.log )
-~~~
+```
 
 # Ajax/RxJS
 
@@ -554,21 +550,21 @@ Esta en el paquete rxjs/ajax
 
 Atrapar errores en el obsevable, este tambien puede retornar un nuevo observable
 
-~~~typescript
+```typescript
 ajax( url )
     .pipe(
-    	map( ... ),
-    	catchError( ... )           
-	).subscribe( console.log );
-            
-            
+        map( ... ),
+        catchError( ... )           
+    ).subscribe( console.log );
+
+
 const manejoError = (err: AjaxError) => {
             console.warn('error en:', err.message);
             return of([]);
         }
-~~~
+```
 
-~~~typescript
+```typescript
 headers = {
     'Content-Type': 'application/json',
     'mi-token': 'asdasd4655'
@@ -576,7 +572,7 @@ headers = {
 
 //Con getJSON ya me devuelve la data en formato JSON
 const obs$ = ajax.getJSON( url, headers )
-	.pipe( catchError( manejoError ) );
+    .pipe( catchError( manejoError ) );
 
 
 obs$.subscribe( data => console.log('data:',data) );
@@ -585,20 +581,18 @@ obs$.subscribe( data => console.log('data:',data) );
 //si uso el throw error, ejecuta el error.
 obs$
     .pipe(
-		catchError( manejoError )
-	)
+        catchError( manejoError )
+    )
     .subscribe( {
         next: val => console.log('val:',val),
         error: err => console.log('err:',err),
         complete: () => console.log('completo'),
 } );
-
-
-~~~
+```
 
 ## post - put - delete
 
-~~~typescript
+```typescript
 ajax.post( url, body, headers );
 ajax.put( url, body, headers );
 ajax.delete( url, headers );
@@ -615,7 +609,7 @@ ajax({
         nombre:'asdads'
     }
 }).subscribe( console.log );
-~~~
+```
 
 # Operadores de transformacion (aplanamiento)
 
@@ -627,55 +621,55 @@ Sacar modelos de clase facil
 
 Emite todos los valores de diferentes observables y no se completa hasta que no se complete a todos los observables que este subscrito.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	map( texto => ajax.getJSON(...) ), //Sale un observable de la peticion
+    map( texto => ajax.getJSON(...) ), //Sale un observable de la peticion
     mergeAll(), //Aplana el objeto de observable a json
     pluck('atributo') //Sale el atributo de cada objeto emitido
 ).subscribe( console.log )
-~~~
+```
 
 ## mergeMap
 
 Regresa un nuevo elemento pero puede tener un observable como transformador, usa el observable por cada elemento que llega del flujo
 
-~~~typescript
+```typescript
 observable$.pipe(
-	mergeMap( (elemento) => interval(1000) //Empieza a emitir valores como un intervalo normal por cada elemento que le llegue
+    mergeMap( (elemento) => interval(1000) //Empieza a emitir valores como un intervalo normal por cada elemento que le llegue
             .pipe( take(3) ) //Toma solo tres por cada elemento para dejar un flujo infinito por el interval
             )
 ).subscribe( console.log )
-~~~
+```
 
 ## switchMap
 
 Retorna la subscripcion a un nuevo observable, el switch map genera una nueva subscripcion por cada elemento que le llega. Si se emite otro elemento mientras aun no se completa la emision del anterior la completa y va con la siguiente.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	switchMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que llega un nuevo valor del flujo, cancela el intervalo y vuelve a em
+    switchMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que llega un nuevo valor del flujo, cancela el intervalo y vuelve a em
 ).subscribe( console.log )
-~~~
+```
 
 ## concatMap
 
 Retorna la subscripcion a un nuevo observable, el cocatMap genera una nueva subscripcion por cada elemento que le llega. Si se emite otro elemento mientras aun no se completa la emision del anterior, espera a que se complete y luego empieza a emitir el observable que seguia en el orden de emision.
 
-~~~typescript
+```typescript
 observable$.pipe(
-	cocathMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
+    cocathMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
 ).subscribe( console.log )
-~~~
+```
 
 ## exhaustMap
 
 Ignora todas las subscripciones nuevas mientras halla alguna subscripcion activa, para poder subscribirse nuevamente, necesita que la subscripcion actual se comp
 
-~~~typescript
+```typescript
 observable$.pipe(
-	exhaustMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
+    exhaustMap( (elemento) => interval(1000) ) //Retorna valores del intervalo hasta que se completa y luego continua con la siguiente emision. 
 ).subscribe( console.log )
-~~~
+```
 
 # Operadores y metodos de combinacion de observables
 
@@ -685,21 +679,21 @@ No confundir concat, merge con Operadores de transformacion obsoletos (no import
 
 Hace que el primer elemento que se emita sea el del argumento del startWith
 
-~~~typescript
+```typescript
 observable$.pipe(
     startWit( 0 ) //El primer valor que se emite es 0
 ).subscribe( console.log )
-~~~
+```
 
 ## endWith
 
 Hace que el ultimo elemento que se emita sea el del argumento del endWith
 
-~~~typescript
+```typescript
 observable$.pipe(
     endWit( 0, 1 ) //El ultomo valor que se emite es 1 y antes que este 0.
 ).subscribe( console.log )
-~~~
+```
 
 # concat
 
@@ -707,23 +701,23 @@ Resibe observables o iterables y lo crea como un nuevo observador.
 
 Los flujos se empiezan a emitir en el orden que esta en el argumento del concat y el siguiente empieza cuando el anterior se completa.
 
-~~~typescript
+```typescript
 observable$.pipe(
     concat( interval$.pipe ( take(3) ),
            interval$.pipe ( take(2) )
 ).subscribe( console.log )
-~~~
+```
 
 ## merge
 
 Va emitiendo los valores de cada observador que recibe como argumento, pero no se completa la emicion hasta que no se completen todos los obsevables.
 
-~~~typescript
+```typescript
 observable$.pipe(
     concat( interval$.pipe ( take(3) ),
            interval$.pipe ( take(2) )
 ).subscribe( console.log )
-~~~
+```
 
 ## combineLatest
 
@@ -731,12 +725,12 @@ Emite un arreglo de los observables que recibe como argumento, envia siempre una
 
 Combina los observables para emitir un solo arreglo con los dos elementos emitidos, cada arreglo se emite cuando uno de los obsevables emite un elemento, el arreglo que emite el combine es la union de los dos ultimos elementos enviados por cada observable, por esto un arreglo puede repetir uno de sus argumentos si un observable no ha vuelto a emitir elementos.
 
-~~~typescript
+```typescript
 observable$.pipe(
     combineLatest( interval$.pipe ( take(3) ),
            interval$.pipe ( take(2) )
 ).subscribe( console.log )
-~~~
+```
 
 ## forkJoin
 
@@ -744,24 +738,12 @@ Recibe observables como argumento, se subscribe a todos estos y cuando todos se 
 
 Por lo anterior este necesita que todos los observables se completen a diferencia del combinaLatest
 
-~~~typescript
+```typescript
 forkJoin(observable1$, 
          observable2$, 
          observable3$
 ).subscribe( console.log )
-~~~
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 ---
 
