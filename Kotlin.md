@@ -1,5 +1,49 @@
 # KOTLIN
 
+## Interfaz Map
+
+La interfaz `Map` en Kotlin define un conjunto de métodos para trabajar con una estructura de datos que almacena pares clave-valor. Hay varias implementaciones de la interfaz `Map` disponibles en Kotlin, cada una con sus propias características y casos de uso específicos. Algunas de las implementaciones más comunes de la interfaz `Map` son las siguientes:
+
+1. `HashMap`: Es una implementación de `Map` basada en una tabla hash. Proporciona un acceso rápido a los elementos y no garantiza un orden específico de los pares clave-valor. Es útil cuando no se requiere un orden particular y se busca un rendimiento eficiente para la inserción, búsqueda y eliminación de elementos.
+
+2. `LinkedHashMap`: Es una implementación de `Map` que mantiene el orden de inserción de los pares clave-valor. Además, permite acceder rápidamente a los elementos a través de una tabla hash. Esta implementación es útil cuando se necesita mantener el orden de inserción y tener un acceso rápido a los elementos.
+
+3. `TreeMap`: Es una implementación de `Map` basada en un árbol de búsqueda binaria. Los pares clave-valor se ordenan según el orden natural de las claves o mediante un comparador personalizado. Esta implementación es adecuada cuando se necesita un orden específico de las claves y una rápida recuperación de los elementos en un orden específico.
+
+4. `EnumMap`: Es una implementación especializada de `Map` diseñada específicamente para usar enumeraciones como claves. Solo permite claves de un tipo de enumeración específico y ofrece un rendimiento óptimo para ese caso de uso particular.
+
+5. `ConcurrentHashMap`: Es una implementación de `Map` diseñada para admitir operaciones concurrentes en hilos múltiples sin la necesidad de bloquear todo el mapa. Proporciona un acceso concurrente seguro y un rendimiento optimizado en entornos de concurrencia.
+
+Estas son solo algunas de las implementaciones más comunes de la interfaz `Map` en Kotlin. La elección de la implementación adecuada dependerá de los requisitos específicos de tu aplicación, como el orden de los elementos, el rendimiento y la concurrencia.
+
+Interfaz Set
+
+La interfaz `Set` en Java define un conjunto de métodos para trabajar con una colección de elementos únicos sin un orden específico. Hay varias implementaciones de la interfaz `Set` disponibles en Java, cada una con sus propias características y casos de uso específicos. Aquí están algunas de las implementaciones más comunes de la interfaz `Set` y sus casos de uso:
+
+1. `HashSet`: Es una implementación de `Set` basada en una tabla hash. Proporciona un acceso rápido a los elementos y no garantiza un orden específico. Se utiliza cuando se necesita almacenar elementos únicos sin preocuparse por el orden de iteración y cuando se requiere un rendimiento eficiente en términos de inserción, eliminación y búsqueda de elementos.
+
+2. `LinkedHashSet`: Es una implementación de `Set` que mantiene el orden de inserción de los elementos. Además, permite un acceso rápido a los elementos a través de una tabla hash. Se utiliza cuando se necesita mantener el orden de inserción y tener un acceso rápido a los elementos.
+
+3. `TreeSet`: Es una implementación de `Set` basada en un árbol de búsqueda balanceado. Los elementos se ordenan automáticamente en un orden ascendente utilizando el orden natural o un comparador personalizado. Se utiliza cuando se necesita almacenar elementos en un orden específico y cuando se requiere un acceso eficiente a los elementos en un orden ascendente.
+
+4. `EnumSet`: Es una implementación especializada de `Set` diseñada específicamente para trabajar con elementos de tipo enumeración. Solo permite elementos de un tipo de enumeración específico y ofrece un rendimiento optimizado para ese caso de uso particular. Se utiliza cuando se necesita almacenar un conjunto de elementos de una enumeración y se busca un rendimiento eficiente.
+
+Estas son solo algunas de las implementaciones más comunes de la interfaz `Set` en Java. La elección de la implementación adecuada dependerá de los requisitos específicos de tu aplicación, como el orden de los elementos, el rendimiento y los tipos de datos utilizados.
+
+## Interfaz List
+
+En Kotlin, la interfaz `List` define un conjunto de métodos para trabajar con una secuencia de elementos ordenados. Hay varias implementaciones de la interfaz `List` disponibles en Kotlin, cada una con sus propias características y casos de uso específicos. Algunas de las implementaciones más comunes de la interfaz `List` son las siguientes:
+
+1. `ArrayList`: Es una implementación de `List` basada en un arreglo de tamaño variable. Proporciona un acceso rápido a los elementos por índice y admite operaciones eficientes de inserción y eliminación en la parte final de la lista. Es útil cuando necesitas un acceso rápido a los elementos y realizas operaciones frecuentes de inserción y eliminación al final de la lista.
+
+2. `LinkedList`: Es una implementación de `List` basada en una lista enlazada. Proporciona un acceso rápido a los elementos en el inicio y el final de la lista, y admite operaciones eficientes de inserción y eliminación en cualquier posición de la lista. Es útil cuando necesitas realizar operaciones frecuentes de inserción y eliminación en cualquier posición de la lista.
+
+3. `MutableList`: Es una interfaz que define una lista mutable y puede ser implementada por otras clases que proporcionan diferentes formas de almacenar y manipular elementos. Puedes usar esta interfaz para tener flexibilidad y cambiar fácilmente la implementación subyacente de la lista según tus necesidades.
+
+4. `ImmutableList`: Es una interfaz que define una lista inmutable, lo que significa que no se pueden realizar cambios en su contenido después de su creación. Puedes usar implementaciones específicas, como `listOf`, para crear listas inmutables directamente.
+
+Estas son algunas de las implementaciones más comunes de la interfaz `List` en Kotlin. La elección de la implementación adecuada depende de tus requisitos específicos, como el acceso, la inserción, la eliminación, la mutabilidad y el rendimiento en tu caso de uso particular.
+
 ## Coroutine
 
 ### Constructores
@@ -33,14 +77,14 @@ suspend fun mySuspendFun(){
 fun main(){
     //Aqui es donde se crea la corrutina
     runBlocking{
-    	operation operation(1,2);    
+        operation operation(1,2);    
     }
 }
 
 //Aqui aun no se usa lo que es una corrutina
 suspend fun operation(numA: Int, numB: Int){
     withContext(Dispatchers.Default){
-    	println("Resultado = " + (numA + numB));    
+        println("Resultado = " + (numA + numB));    
     }
 }
 ```
@@ -135,7 +179,7 @@ suspend fun pow(d : Long){
 }
 ```
 
-### Launch 
+### Launch
 
 Se ejecuta en segundo plano, pero no se espera que retorne nada.
 
@@ -179,7 +223,7 @@ suspend fun getFoo(arg: String): String{
 }
 ```
 
-### Lock 
+### Lock
 
 Hay casos en las que las `coroutines` utilicen al tiempo variables, para evitar que estos valores se vean afectados al final, se usa `Mutex`. con su método `withLock`, para evitar esto.
 
@@ -283,8 +327,6 @@ enum class Notes() { DO, RE, MI, FA, SOL, LA, SI }
 ### Channel
 
 Al usar el `ConcurrentLinkedQueue`, esta es pensado en operaciones de concurrencia y no de `Coroutines`, por lo tanto no son lo mas eficientes, para esto, en `coroutines` tenemos los `channel`.
-
-
 
 #### Example:
 
@@ -443,7 +485,7 @@ class ColorConsumer(private val dispatcher: CoroutineDispatcher = Dispatchers.De
     fun released(){
         this.job.cancel();
     }
-    
+
     //Constructor produce, agrega una nueva funcion a la clase existente para ser usada
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun ReceiveChannel<Colors>.filterByPrimary(): ReceiveChannel<Colors> = produce {
@@ -453,7 +495,7 @@ class ColorConsumer(private val dispatcher: CoroutineDispatcher = Dispatchers.De
             }
         }
     }
-    
+
 }
 
 data class Colors(
@@ -475,7 +517,6 @@ class ColorsUtil {
         }
     }
 }
-
 ```
 
 Con el constructor produce, retornamos objetos de tipo `ReceiveChanel\<T>`, de tal manera que podemos extender las funcionalidades de nuestros `channels`. 
@@ -509,7 +550,7 @@ Constructores:
 
 #### Final operators
 
-*  **collect**
+* **collect**
 
 #### Accumulators
 
@@ -520,4 +561,3 @@ Constructores:
 #### Exceptios handles
 
 * **`catch`**: No rompe el flujo, y se puede luego continuar con otros flujos si es necesario, pero los flujos anteriores seran completados. Igual repasar el tema de manejo de errores
-
