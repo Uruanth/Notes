@@ -1,31 +1,29 @@
 # Kafka
 
-En .\bin\windows\
+En .\bin\
 
 ```shell
 ## Iniciar zookeeper
-.\zookeeper-server-start.bat .\config\zookeeper.properties
+.\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 ## Iniciar apache kafka
-.\kafka-server-start.bat .\config\server.properties
+.\windows\kafka-server-start.bat .\config\server.properties
 
 ## Listar topicos
-.\kafka-topics.bat --list --zookeeper localhost: 2181
+.\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 ## Crear topicos
-.\kafka-topics.bat --create--zookeeper localhost: 2181 --replication-factor --partitions 1 --topic topico-example
+.\windows\kafka-topics.bat --create --topic quickstart-events --bootstrap-server localhost:9092
 
 ## Crear productor
-.\kafka-console-producer.bat --broker-list localhost:9092 --topic topico-example
+.\windows\kafka-console-producer.bat --topic quickstart-events --bootstrap-server localhost:9092
 
 ## Crear consumidor
-.\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topico-example --from-beginning
+.\windows\kafka-console-consumer.bat --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 
 ## Detener kafka
-.\kafka-server-stop.bat
+.\windows\kafka-server-stop.bat
 
 
 ## Detener zeepeker
-.\zookeeper-server-stop.bat
+.\windows\zookeeper-server-stop.bat
 ```
-
-
