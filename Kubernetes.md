@@ -84,7 +84,7 @@ kubectl get deployment
 
 
 # describe
-kubectl describe pod \| deployment \| service <name>
+kubectl describe pod | deployment | service <name>
 
 # Get all
 kubectl get all
