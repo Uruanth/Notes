@@ -88,4 +88,20 @@ kubectl describe pod | deployment | service <name>
 
 # Get all
 kubectl get all
+
+# Aumentar replicas
+kubeclt scale deployment <name> --replicas=2
 ```
+
+
+
+
+
+## Minikube
+
+El host para conectarse con minikube
+
+```shell
+minikube service <name> --url
+```
+
