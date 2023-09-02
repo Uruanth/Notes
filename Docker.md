@@ -56,6 +56,6 @@ docker run -d -p 3306:3306 --name mysql-db -e MYSQL_ROOT_PASSWORD=admin mysql
 docker run -t -i --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ## mongo
 docker run --name mongoDB -v D:\Docker-Volumns:/etc/mongo -p 27017:27017 -d mongo:3
-## Postgres
+## Postgres, el user por default es postgres
 docker run -p 5432:5432 --name some-postgres -e POSTGRES_PASSWORD=pass -d postgres
 ```
