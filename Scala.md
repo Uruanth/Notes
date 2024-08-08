@@ -224,7 +224,6 @@ object Asignatura {
         println("foo")
     }
 }
-
 ```
 
 Cuando se usa un object y una clase que se llama igual, es como si fueran los metodos estaticos de la clase, haciendo el simil con Java.
@@ -261,8 +260,6 @@ object Main {
 }
 ```
 
-
-
 ### Case Class
 
 Crea un Object companion, que ya viene con el metodo apply y otros implementados, como:
@@ -281,7 +278,7 @@ Crea un Object companion, que ya viene con el metodo apply y otros implementados
 
 ```scala
 case class Foo(bar: String){
-    
+
 }
 
 object Main {
@@ -313,10 +310,6 @@ class Bar(foo: String) extends Foo(foo){
     }
 }
 ```
-
-
-
-
 
 ## Utils
 

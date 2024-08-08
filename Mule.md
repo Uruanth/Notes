@@ -78,8 +78,6 @@ Es un objeto predefinido en Mule, que viene en la cabeceras del listener, si no 
 
 ## UriParam
 
-
-
 \<Path>foo/{param1}/bar/{param2}
 
 ## Varios
@@ -379,10 +377,6 @@ Se usa el componente Mock when, cuando se selecciona el procesador, es el compon
 
 En la sección `Then Return` es donde se asignan los valores al Mule event
 
-
-
-
-
 # Security Schemas
 
 ## OAuth 2.0
@@ -426,16 +420,10 @@ securitySchemes:
     description: La API esta protegida por autenticación basica
 ```
 
-
-
-
-
 # OAuth0
 
 ```tex
 https://dev-tbod0mca6tqvs3mv.us.auth0.com/
 
 curl --request POST --url https://dev-tbod0mca6tqvs3mv.us.auth0.com/oauth/token --header 'content-type: application/json' --data '{"client_id":"WdopdiFqajpkQpZ2ACdts0YSZEYw4Hez","client_secret":"MUIJK0hrLMi1GGsGyWktq4EJhCZDJ587RYQ14rhLXsBDnwh_v2yU5Uv30TwVackK", "audience":"https://dev-tbod0mca6tqvs3mv.us.auth0.com/api/v2/", "grant_type":"client_credentials"}'
-
 ```
-
